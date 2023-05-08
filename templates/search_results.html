@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Price Scraper - Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            max-width: 800px;
+            border-collapse: collapse;
+            margin: 1rem auto;
+        }
+
+        th,
+        td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .back-to-search {
+            font-weight: bold;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 767px) {
+            .back-to-search {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+
+        a.view-prices {
+            font-weight: bold;
+            display: inline-block;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #333;
+            padding: 5px 10px;
+            border-radius: 3px;
+            background-color: #fff;
+            transition: all 0.3s;
+        }
+
+        a.view-prices:hover {
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Amazon Price Scraper - Search Results</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td>{{ result.name }}</td>
+                <td><img src="{{ result.image }}" alt="{{ result.name }}" style="width: 100px; height: auto;">
+                </td>
+                <td><a href="{{ url_for('prices', asin=result.asin) }}" class="view-prices">View Prices</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('index') }}" class="back-to-search">Back to search</a>
+</body>
+
+</html>

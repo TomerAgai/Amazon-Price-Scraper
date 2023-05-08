@@ -1,0 +1,72 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<style>
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f8f8f8;
+    }
+
+    a.back-to-search {
+        font-weight: bold;
+        display: inline-block;
+        margin-top: 20px;
+        text-decoration: none;
+        color: #333;
+        border: 1px solid #333;
+        padding: 10px 20px;
+        border-radius: 3px;
+        background-color: #fff;
+        transition: all 0.3s;
+    }
+
+    .back-to-search-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    a.back-to-search:hover {
+        background-color: #333;
+        color: #fff;
+    }
+</style>
+<h1>Past Searches</h1>
+<table>
+    <tr>
+        <th>ASIN</th>
+        <th>Product Name</th>
+        <th>Timestamp</th>
+    </tr>
+    {% for search in past_searches %}
+    <tr>
+        <td><a href="{{ url_for('prices', asin=search[1]) }}">{{ search[1] }}</a></td>
+        <td>{{ search[2] }}</td>
+        <td>{{ search[7] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<div class="back-to-search-container">
+    <a href="{{ url_for('index') }}" class="back-to-search">Back to search</a>
+</div>
+{% endblock %}
